@@ -12,7 +12,7 @@ export const Register = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Acá va la lógica para procesar el formulario
+
     console.log("Datos del formulario:", form);
   };
 
