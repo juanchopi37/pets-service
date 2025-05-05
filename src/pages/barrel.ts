@@ -1,1 +1,2 @@
-export * from "/home/index";
+export * from "./home/index";
+export * from "./register/";
