@@ -1,7 +1,7 @@
 import { Stack, Typography, TextField, Button } from "@mui/material";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Login } from "./Login";
+import { Login } from "../login";
 
 export const Register = () => {
   const [form, setForm] = useState({
@@ -74,3 +74,4 @@ export const Register = () => {
       </Button>
     </Stack>
   );
+};
