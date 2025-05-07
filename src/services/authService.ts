@@ -22,8 +22,8 @@ export const authService = {
         return { success: true, user: adminUser };
       }
 
-      // Verificar si es usuario regular
-      // Nota: Esto asume un solo usuario base registrado en localStorage con la key "user".
+      // Verificar si es usuario normal  
+      // esto asume un solo usur base registrado en localS torage con la key "user" 
       const storedUserJSON = localStorage.getItem("user");
       if (storedUserJSON) {
         const storedUser: User = JSON.parse(storedUserJSON);
@@ -61,8 +61,16 @@ export const authService = {
         password: userData.password,
         role: "user" as const,
       };
-      // Esto sobrescribe al usuario anterior si existe.
-      // Para múltiples usuarios, se necesitaría almacenar un array de usuarios.
+      // sobrescribiria al usuario anteriormente registrado ⬆️
+      // Para múltiples usuarios se necesitaría almacenar un array de usuarios, pero 
+      // eso no es parte de la lógica actual.
+      // localStorage.setItem("users", JSON.stringify([newUser]));
+      // Guardar el nuevo usuario en localStorage
+      // Esto sobrescribirá el usuario anterior, si existe.
+      // Si se desea permitir múltiples usuarios, se debería almacenar un array de usuarios.
+      // const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+      // existingUsers.push(newUser);
+      // localStorage.setItem("users", JSON.stringify(existingUsers));    
       localStorage.setItem("user", JSON.stringify(newUser));
       return { success: true, user: newUser, message: "Registro exitoso." };
     } catch (error) {
@@ -75,13 +83,18 @@ export const authService = {
     localStorage.removeItem("currentUser");
   },
 
+  // Obtener el user actial en el local storaege
   getCurrentUser(): CurrentUser | null {
     try {
       const userString = localStorage.getItem("currentUser");
       if (userString) {
         const user: CurrentUser = JSON.parse(userString);
-        // Asegurarse de que solo devuelva si isLoggedIn es true y tiene un rol válido
-        return user.isLoggedIn && (user.role === "admin" || user.role === "user") ? user : null;
+        // Asegurar si isLoggedIn es true y tiene un rol válido
+        if (user.isLoggedIn && (user.role === "admin" || user.role === "user")) {
+          return user;
+        } else {
+          return null;
+        }
       }
       return null;
     } catch {
