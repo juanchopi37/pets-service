@@ -1,5 +1,7 @@
 import { Stack, Typography, TextField, Button } from "@mui/material";
 import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+// import { Login } from "../login";
 
 export const Register = () => {
   const [form, setForm] = useState({
@@ -10,10 +12,12 @@ export const Register = () => {
     phoneNumber: "",
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log("Datos del formulario:", form);
+    localStorage.setItem("user", JSON.stringify(form));
+    navigate("");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
