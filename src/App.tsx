@@ -3,19 +3,25 @@ import { Stack } from "@mui/material";
 import "./App.css";
 import {Route, Routes, Navigate} from "react-router-dom";
 import { Loyaut } from "./components/Loyaut";
-
+import Login from "./pages/login";
 function App() {
  const [] 
   
   return (
-  <Loyaut>
+  <Loyaut> 
+  {/**/}
+   <Routes> 
+  {/**/}
+  {/**/}
+     </Routes> 
+  {/**/}
+      <Login>
+         {/**/}
+          {/**/} 
+      </Login>
+        {/**/}
+   </Loyaut> 
 
-      <Routes>
-
-
-      </Routes>
-
-    </Loyaut>
   )
-
+}
 export default App;
