@@ -1,7 +1,7 @@
 import { Stack, Typography, TextField, Button } from "@mui/material";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Login } from "../login";
+// import { Login } from "../login";
 
 export const Register = () => {
   const [form, setForm] = useState({
