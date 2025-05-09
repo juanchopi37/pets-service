@@ -5,7 +5,11 @@ import { authService } from "./services/authService";
 import { useEffect } from "react";
 
 // Componente para proteger rutas según el rol
-const ProtectedRoute = ({ requiredRole }: { requiredRole: "admin" | "user" }) => {
+const ProtectedRoute = ({
+  requiredRole,
+}: {
+  requiredRole: "admin" | "user";
+}) => {
   const currentUser = authService.getCurrentUser();
   const location = useLocation(); // Para redirigir de vuelta después del login
 
@@ -18,7 +22,12 @@ const ProtectedRoute = ({ requiredRole }: { requiredRole: "admin" | "user" }) =>
     // Si está logueado pero no tiene el rol correcto, redirigir a su página por defecto
     // o a una página de "acceso denegado" o de vuelta a login.
     // Por ahora, redirigimos a su "home" respectivo.
-    return <Navigate to={currentUser.role === "admin" ? "/dashboard" : "/home"} replace />;
+    return (
+      <Navigate
+        to={currentUser.role === "admin" ? "/dashboard" : "/home"}
+        replace
+      />
+    );
   }
 
   return <Outlet />; // Si está logueado y tiene el rol correcto, renderizar la ruta hija
@@ -29,20 +38,19 @@ const ProtectedRoute = ({ requiredRole }: { requiredRole: "admin" | "user" }) =>
 const PublicRoute = () => {
   const currentUser = authService.getCurrentUser();
   if (currentUser && currentUser.isLoggedIn) {
-    return <Navigate to={currentUser.role === "admin" ? "/dashboard" : "/home"} replace />;
+    return (
+      <Navigate
+        to={currentUser.role === "admin" ? "/dashboard" : "/home"}
+        replace
+      />
+    );
   }
   return <Outlet />; // Si no está logueado, renderizar la ruta hija (Login o Register)
 };
 
 const App = () => {
-  // Este useEffect es un pequeño truco para forzar la reevaluación de las rutas
-  // si el estado de autenticación cambia (ej. por logout o login en otra pestaña).
-  // Una solución más completa usaría un Context API para el estado de autenticación.
   const location = useLocation();
-  useEffect(() => {
-    // Simplemente para que el componente se actualice en cambios de ruta,
-    // lo que ayuda a que las redirecciones basadas en authService se re-evalúen.
-  }, [location.pathname]);
+  useEffect(() => {}, [location.pathname]);
 
   return (
     <Loyout>
@@ -81,7 +89,7 @@ const App = () => {
 
         {/* Ruta comodín para cualquier otra URL no definida */}
         {/* Podrías tener un componente <NotFound /> aquí */}
-        <Route path="*" element={<Navigate to="/" replace />} /> 
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Loyout>
   );
