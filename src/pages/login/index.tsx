@@ -30,7 +30,9 @@ export const Login = () => {
     const result = authService.login(formData.email, formData.password);
 
     if (result.success && result.user) {
-      alert(`Bienvenido ${result.user.role === "admin" ? "Administrador" : result.user.name}`);
+      alert(
+        `Bienvenido ${result.user.role === "admin" ? "Administrador" : result.user.name}`,
+      );
       navigate(result.user.role === "admin" ? "/dashboard" : "/home");
     } else {
       alert(result.message || "Error al iniciar sesión");
@@ -38,8 +40,17 @@ export const Login = () => {
   };
 
   return (
-    <Stack padding={2} component="form" onSubmit={handleSubmit} spacing={2} maxWidth={400} width="100%">
-      <Typography variant="h4" align="center">Iniciar Sesión</Typography>
+    <Stack
+      padding={2}
+      component="form"
+      onSubmit={handleSubmit}
+      spacing={2}
+      maxWidth={400}
+      width="100%"
+    >
+      <Typography variant="h4" align="center">
+        Iniciar Sesión
+      </Typography>
 
       <TextField
         label="Email"
@@ -64,8 +75,12 @@ export const Login = () => {
       <Button type="submit" variant="contained" fullWidth>
         Iniciar Sesión
       </Button>
+      <Typography>admin@veterinaria.com</Typography>
+      <Typography>admin1234</Typography>
 
-      <Box textAlign="center" mt={2}> {/* Corregido y unificado el Box para el enlace */}
+      <Box textAlign="center" mt={2}>
+        {" "}
+        {/* Corregido y unificado el Box para el enlace */}
         <Typography variant="body2">
           ¿No tienes una cuenta? <Link to="/register">Regístrate</Link>
         </Typography>
