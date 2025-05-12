@@ -30,7 +30,15 @@ export const Home = () => {
       <DashboardLayout>
         <Stack padding={2} spacing={2}>
           <FormControl>
-            <Stack fullWidth spacing={2}></Stack>
+            <Stack fullWidth spacing={2}>
+              <TextField
+                label="Teléfono"
+                name="phoneNumber"
+                value={form.phoneNumber}
+                onChange={handleChange}
+                fullWidth
+              />
+            </Stack>
           </FormControl>
         </Stack>
       </DashboardLayout>
