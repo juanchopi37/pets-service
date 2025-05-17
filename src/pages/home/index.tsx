@@ -1,19 +1,37 @@
 // filepath: /home/qubit/study/pets-service/src/pages/home/index.tsx
+import React, { useState, ChangeEvent } from "react";
 import {
   FormControl,
   Typography,
   Button,
   Box,
   Stack,
-  Card,
+  TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { FormPets } from "../../types/types";
 
 export const Home = () => {
   const navigate = useNavigate();
   const currentUser = authService.getCurrentUser();
+
+  const [form, setForm] = useState<FormPets>({
+    petName: "",
+    race: "",
+    age: "",
+    description: "",
+    ownerId: currentUser?.id || "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
 
   const handleLogout = () => {
     authService.logout();
@@ -28,15 +46,14 @@ export const Home = () => {
         </Typography>
       </Stack>
       <DashboardLayout>
-        <Stack padding={2} spacing={2}>
+        <Stack padding={2}>
           <FormControl>
             <Stack fullWidth spacing={2}>
               <TextField
-                label="Teléfono"
-                name="phoneNumber"
-                value={form.phoneNumber}
+                label="Nombre"
+                name="petName"
+                value={form.petName}
                 onChange={handleChange}
-                fullWidth
               />
             </Stack>
           </FormControl>
