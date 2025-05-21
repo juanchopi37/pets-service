@@ -12,7 +12,7 @@ const initializeLocalStorage = () => {
       name: 'Admin User',
       role: 'admin'
     };
-    
+
     localStorage.setItem('users', JSON.stringify([adminUser]));
     localStorage.setItem('pets', JSON.stringify([]));
     localStorage.setItem('appointments', JSON.stringify([]));
@@ -34,6 +34,11 @@ export const getUserById = (id: string): User | undefined => {
 export const getUserByEmail = (email: string): User | undefined => {
   const users = getUsers();
   return users.find(user => user.email === email);
+};
+
+export const getUserPassword = (password: string): User | undefined => {
+  const users = getUsers();
+  return users.find(user => user.password === password);
 };
 
 export const addUser = (user: User): void => {
@@ -91,7 +96,7 @@ export const addAppointment = (appointment: Appointment): void => {
 export const updateAppointment = (updatedAppointment: Appointment): void => {
   const appointments = getAppointments();
   const index = appointments.findIndex(appointment => appointment.id === updatedAppointment.id);
-  
+
   if (index !== -1) {
     appointments[index] = updatedAppointment;
     localStorage.setItem('appointments', JSON.stringify(appointments));
